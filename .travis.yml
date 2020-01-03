@@ -1,0 +1,24 @@
+language: c
+
+os: linux
+dist: xenial
+
+arch:
+  - amd64
+  - arm64
+  - s390x
+  - ppc64le
+
+addons:
+  apt:
+    update: true
+    packages: build-essential gdb apport
+
+compiler:
+  - gcc
+  - clang
+
+script: ci/segfault-demo.sh
+
+notifications:
+  email: false
