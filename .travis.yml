@@ -12,7 +12,7 @@ arch:
 addons:
   apt:
     update: true
-    packages: build-essential gdb apport
+    packages: build-essential gdb
 
 compiler:
   - gcc
