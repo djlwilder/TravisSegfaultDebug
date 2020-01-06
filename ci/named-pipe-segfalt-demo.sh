@@ -2,16 +2,26 @@
 
 set -ex
 
-# Test prog for testing core file generation and gdb setup.
-  cat >testprg.c <<EOS
-  int main(int argc, char *argv[])
-  {
-            char *a;
-            a=(char *)0;
-            a[1]='A';
-            return 0;
-  }
+# The real test prog
+cat >testprg.c <<EOS
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+int main(int argc, char *argv[])
+{
+        struct stat st;
+        int fd;
+
+        fd=open("./fifo",O_RDWR);
+        // The fstat segfaults if the named pipe has been unlinked.
+        unlink("./fifo");
+        fstat(fd, &st);
+        return 0;
+}
 EOS
+
 
 
 cat testprg.c
