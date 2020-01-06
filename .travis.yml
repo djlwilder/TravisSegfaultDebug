@@ -18,7 +18,9 @@ compiler:
   - gcc
   - clang
 
-script: ci/segfault-demo.sh
+# script: ci/segfault-demo.sh
+script: ci/named-pipe-segfalt-demo.sh
+
 
 notifications:
   email: false
